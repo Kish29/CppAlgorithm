@@ -37,6 +37,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::pair;
 
 using std::iterator;
 // 序列容器的底层实现是：数组+扩容复制 / 链表
@@ -63,7 +64,7 @@ using std::unordered_multimap;
 // 特殊容器
 using std::stack;
 using std::queue;
-using std::pair;
+using std::priority_queue;
 
 typedef unsigned long ul;
 
@@ -92,19 +93,6 @@ static void VectorPrint(const vector<T> &v) {
     printf("]\n");
 }
 
-template<class T>
-static void QueuePrint(queue<T> q) {
-    printf("Size<%lu> [", q.size());
-    while (!q.empty()) {
-        if (q.size() == 1) {
-            cout << q.front();
-        } else {
-            cout << q.front() << ", ";
-        }
-        q.pop();
-    }
-    printf("]\n");
-}
 
 template<class T>
 static void DequeuePrint(deque<T> dq) {
@@ -186,17 +174,86 @@ static void MultimapPrint(const multimap<K, V> &mm) {
 }
 
 template<class T>
-static void StackPrint(stack<T> s) {
-    printf("Size<%lu> [", s.size());
-    while (!s.empty()) {
-        if (s.size() == 1) {
-            cout << s.top();
-        } else {
-            cout << s.top() << ", ";
-        }
-        s.pop();
+static void UnorderedSetPrint(const unordered_set<T> &us) {
+    printf("Size<%lu> [", us.size());
+    for (const T &t: us) {
+        cout << t << ", ";
     }
     printf("]\n");
+}
+
+template<class T>
+static void UnorderedMultisetPrint(const unordered_multiset<T> &ums) {
+    printf("Size<%lu> [", ums.size());
+    for (const T &t: ums) {
+        cout << t << ", ";
+    }
+    printf("]\n");
+}
+
+template<class K, class V>
+static void UnorderedMapPrint(const unordered_map<K, V> &um) {
+    printf("Size<%lu> [", um.size());
+    for (const pair<K, V> &kv: um) {
+        cout << "{" << kv.first << "," << kv.second << "}" << ", ";
+    }
+    printf("]\n");
+}
+
+template<class K, class V>
+static void UnorderedMultimapPrint(const unordered_multimap<K, V> &umm) {
+    printf("Size<%lu> [", umm.size());
+    for (const pair<K, V> &kv: umm) {
+        cout << "{" << kv.first << "," << kv.second << "}" << ", ";
+    }
+    printf("]\n");
+}
+
+template<class T>
+static void StackPrint(stack<T> s) {
+    vector<T> tmp;
+    while (!s.empty()) {
+        tmp.push_back(s.top());
+        s.pop();
+    }
+    std::reverse(tmp.begin(), tmp.end());
+    VectorPrint(tmp);
+}
+
+template<class T>
+static void QueuePrint(queue<T> q) {
+    printf("Size<%lu> [", q.size());
+    while (!q.empty()) {
+        if (q.size() == 1) {
+            cout << q.front();
+        } else {
+            cout << q.front() << ", ";
+        }
+        q.pop();
+    }
+    printf("]\n");
+}
+
+template<class T>
+static void PriorityQueuePrint(priority_queue<T> pq) {
+    vector<T> tmp;
+    while (!pq.empty()) {
+        tmp.push_back(pq.top());
+        pq.pop();
+    }
+    std::reverse(tmp.begin(), tmp.end());
+    VectorPrint(tmp);
+}
+
+template<class T, class CMP>
+static void PriorityQueuePrint(priority_queue<T, vector<T>, CMP> pq) {
+    vector<T> tmp;
+    while (!pq.empty()) {
+        tmp.push_back(pq.top());
+        pq.pop();
+    }
+    std::reverse(tmp.begin(), tmp.end());
+    VectorPrint(tmp);
 }
 
 #endif //CPPALGORITHM_BASICSTL_H

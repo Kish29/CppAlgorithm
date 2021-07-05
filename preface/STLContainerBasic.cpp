@@ -12,10 +12,31 @@ void UnorderedContainer();
 
 void SpecialContainer();
 
+class RuntimeCompare {
+public:
+    enum cmpMode { normal, reverse };
+private:
+    cmpMode mode{};
+public:
+    // 禁用隐式转换
+    explicit RuntimeCompare(cmpMode m = normal) : mode(m) {}
+
+    template<class T>
+    bool operator()(const T &t1, const T &t2) const {
+        return this->mode == normal ? t1 < t2 : t2 < t1;
+    }
+
+    bool operator==(const RuntimeCompare &rc) const {
+        return this->mode == rc.mode;
+    }
+
+};
+
 int main() {
 //    SequenceContainer();
 //    AssociatedContainer();
-    UnorderedContainer();
+//    UnorderedContainer();
+//    SpecialContainer();
 }
 
 void SequenceContainer() {
@@ -126,14 +147,14 @@ void SequenceContainer() {
     // forward_list
     Println("forward_list:");
     // 单向链表
-    forward_list<int> fl;
+//    forward_list<int> fl;
     // 插入
-    fl.push_front(1);
-    fl.emplace_front(1);
+//    fl.push_front(1);
+//    fl.emplace_front(1);
 
     // 某处插入
-    fl.insert_after(fl.begin(), 2);
-    fl.emplace_after(fl.begin(), 2);
+//    fl.insert_after(fl.begin(), 2);
+//    fl.emplace_after(fl.begin(), 2);
 
 }
 
@@ -149,6 +170,7 @@ void AssociatedContainer() {
     s.insert("apple");
     s.insert("apple");
     s.insert("apple");
+    s.emplace("carrot");
     SetPrint(s);
 
     // 删除
@@ -196,33 +218,108 @@ void AssociatedContainer() {
 void UnorderedContainer() {
     Println("无序容器是HashTable实现，一般采用链表解冲突");
     Println("unordered_set:");
+    unordered_set<string> us;
+    us.insert("banana");
+    us.insert("apple");
+    us.insert("apple");
+    us.insert("apple");
+    us.insert("apple");
+    us.emplace("carrot");
+    UnorderedSetPrint(us);
+    us.erase("apple");
+    UnorderedSetPrint(us);
+
     Println("\nunordered_multiset:");
+    unordered_multiset<string> ums;
+    ums.insert("banana");
+    ums.insert("apple");
+    ums.insert("apple");
+    ums.insert("apple");
+    ums.insert("apple");
+    ums.emplace("carrot");
+    UnorderedMultisetPrint(ums);
+    ums.erase("apple");
+    UnorderedMultisetPrint(ums);
+
     Println("\nunordered_map:");
+    unordered_map<string, int> um;
+    um.insert(pair<string, int>{"banana", 2});
+    um.insert(make_pair("apple", 1));
+    um.insert(make_pair("apple", 1));
+    um.insert(make_pair("apple", 1));
+    um.insert(make_pair("apple", 1));
+    um.insert(make_pair("carrot", 3));
+    UnorderedMapPrint(um);
+    um.erase("apple");
+    UnorderedMapPrint(um);
+
     Println("\nunordered_multimap:");
+    unordered_multimap<string, int> umm;
+    umm.insert(pair<string, int>{"banana", 2});
+    umm.insert(make_pair("apple", 1));
+    umm.insert(make_pair("apple", 1));
+    umm.insert(make_pair("apple", 1));
+    umm.insert(make_pair("apple", 1));
+    umm.insert(make_pair("carrot", 3));
+    UnorderedMultimapPrint(umm);
+    umm.erase("apple");
+    UnorderedMultimapPrint(umm);
 }
 
 void SpecialContainer() {
-    // queue
     Println("特殊容器");
-    queue<int> q;
-    // 末尾添加 push==emplace
-    q.push(0);
-    q.emplace(0);
-    // 访问最前面元素
-    q.front();
-    // 访问末尾元素
-    q.back();
-    // 弹出
-    q.pop();
-    for (int i = 0; i < 6; ++i) {
-        q.push(i);
-        q.emplace(i);
-    }
-    QueuePrint(q);
 
     // stack
+    Println("stack:");
     stack<int> s;
-    // 末尾添加
-    s.push(0);
-    s.emplace(0);
+    // 添加元素 push=emplace
+    for (int i = 0; i < 6; ++i) {
+//        s.push(i + 1);
+        s.emplace(i + 1);
+    }
+    StackPrint(s);
+    // 访问元素
+    Println(s.top());
+    // 弹出栈顶元素
+    s.pop();
+
+    StackPrint(s);
+
+    // queue
+    Println("\nqueue:");
+    queue<int> q;
+    // 末尾添加 push==emplace
+    for (int i = 0; i < 6; ++i) {
+        q.push(i + 1);
+    }
+    QueuePrint(q);
+    // 访问最前面元素
+    Println(q.front());
+    // 访问末尾元素
+    Println(q.back());
+    // 弹出队列头部元素
+    q.pop();
+
+    QueuePrint(q);
+
+    // priority_queue
+    // priority_queue根据插入的值进行了排序，默认是 从大到小
+    Println("\npriority_queue:");
+    priority_queue<int, vector<int>, RuntimeCompare> pq;
+    // 插入元素
+    for (int i = 0; i < 6; ++i) {
+        pq.push(i + 1);
+//        pq.emplace(i + 1);
+    }
+    PriorityQueuePrint(pq);
+
+    // 自定义逆序
+    RuntimeCompare cmp(RuntimeCompare::reverse);
+    priority_queue<int, vector<int>, RuntimeCompare> pq2(cmp);
+    // 插入元素
+    for (int i = 0; i < 6; ++i) {
+//        pq.push(i + 1);
+        pq2.emplace(i + 1);
+    }
+    PriorityQueuePrint(pq2);
 }
