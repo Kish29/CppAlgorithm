@@ -22,6 +22,9 @@ class TimeMeasureExe {
 public:
     virtual void exe() = 0;
 
+    virtual ~TimeMeasureExe() {
+        printf("Class-TimeMeasureExe destructor called!\n");
+    };
 };
 
 
@@ -53,19 +56,19 @@ public:
         switch (this->unit) {
             case MICROSECONDS:
                 duration /= 1000;
-                printf("duration -> %llu µs", duration);
+                printf("duration -> %llu µs\n", duration);
                 break;
             case MILLISECONDS:
                 duration /= 1000000;
-                printf("duration -> %llu ms", duration);
+                printf("duration -> %llu ms\n", duration);
                 break;
             case SECONDS:
                 duration /= SECOND_2_NANO;
-                printf("duration -> %llu s", duration);
+                printf("duration -> %llu s\n", duration);
                 break;
             case NANOSECONDS:
             default:
-                printf("duration -> %llu ns", duration);
+                printf("duration -> %llu ns\n", duration);
                 break;
         }
         return duration;

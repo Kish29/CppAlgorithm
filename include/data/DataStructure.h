@@ -50,18 +50,16 @@ struct ListNode {
 
 };
 
-template<class T>
 struct TreeNode {
-    T val{};
+    int val;
+    TreeNode *left;
+    TreeNode *right;
 
-    struct TreeNode<T> *left{};
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
 
-    struct TreeNode<T> *right{};
+    explicit TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 
-    bool operator==(const TreeNode<T> &rh) {
-        return this->val == rh.val;
-    }
-
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
 template<class T>
