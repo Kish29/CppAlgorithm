@@ -33,6 +33,8 @@ public:
         long res = fibLoop(SAMPLE);
         printf("res -> %ld\n", res);
     }
+
+    ~Fib() override = default;
 };
 
 /*int main() {

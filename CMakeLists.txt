@@ -12,6 +12,7 @@ add_executable(
         include/BasicSTL.h
         include/data/DataStructure.h
         include/timemeasure/TimeMeasure.h
+        preface/STLContainerBasic.cpp
         preface/Fib.cpp
         preface/FullPermutation.cpp
         preface/CoinsDP.cpp

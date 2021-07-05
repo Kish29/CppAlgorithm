@@ -22,6 +22,7 @@ class TimeMeasureExe {
 public:
     virtual void exe() = 0;
 
+    virtual ~TimeMeasureExe() = default;
 };
 
 
