@@ -242,6 +242,9 @@ static void PriorityQueuePrint(priority_queue<T> pq) {
         pq.pop();
     }
     std::reverse(tmp.begin(), tmp.end());
+    /*std::sort(tmp.begin(), tmp.end(), [](const T &a, const T &b) -> bool {
+        return a < b;
+    });*/
     VectorPrint(tmp);
 }
 

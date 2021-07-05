@@ -32,12 +32,55 @@ public:
 
 };
 
-int main() {
-//    SequenceContainer();
-//    AssociatedContainer();
-//    UnorderedContainer();
-//    SpecialContainer();
+class STLContainer : public TimeMeasureExe {
+public:
+    void exe() override {
+        SequenceContainer();
+        AssociatedContainer();
+        UnorderedContainer();
+        SpecialContainer();
+    }
+};
+
+class TestReference {
+public:
+    TestReference() {
+        printf("TestReference constructor called!\n");
+    }
+
+    TestReference(const TestReference &rh) {
+        printf("TestReference copy constructor called!\n");
+    }
+
+    TestReference(const TestReference &&rh) noexcept {
+        printf("TestReference copy constructor called!\n");
+    }
+
+    ~TestReference() {
+        printf("TestReference destructor called!\n");
+    }
+
+    void printHello() const {
+        printf("hello world\n");
+    }
+};
+
+void test1(const TestReference t) {
+    t.printHello();
 }
+
+void test2(const TestReference &t) {
+    t.printHello();
+}
+
+//int main() {
+//    TestReference t;
+//    test1(t);
+//    test2(t);
+//    Println(s);
+//    STLContainer stlContainer;
+//    timeMeasure->measureTime(stlContainer);
+//}
 
 void SequenceContainer() {
     // vector

@@ -14,10 +14,12 @@ add_executable(
         include/timemeasure/TimeMeasure.h
         preface/STLContainerBasic.cpp
         preface/STLIntelliPointer.cpp
+        preface/Cpp11Lambda.cpp
         preface/Fib.cpp
         preface/FullPermutation.cpp
         preface/CoinsDP.cpp
         preface/NQueens.cpp
         preface/BFSTemplate.cpp
         questions/Agl_01.cpp
+        questions/Agl_02.cpp
 )
