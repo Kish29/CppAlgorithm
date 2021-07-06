@@ -69,8 +69,9 @@ public:
     }
 };
 
+/*
 int main() {
     Lambda lambda;
     timeMeasure->measureTime(lambda);
     return 0;
-}
+}*/

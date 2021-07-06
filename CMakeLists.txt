@@ -13,13 +13,16 @@ add_executable(
         include/data/DataStructure.h
         include/timemeasure/TimeMeasure.h
         preface/STLContainerBasic.cpp
-        preface/STLIntelliPointer.cpp
+        preface/STLSmartPointer.cpp
         preface/Cpp11Lambda.cpp
+        preface/CppException.cpp
         preface/Fib.cpp
         preface/FullPermutation.cpp
         preface/CoinsDP.cpp
         preface/NQueens.cpp
         preface/BFSTemplate.cpp
+        preface/SharePointer3.cpp
+        preface/WeakPointer1.cpp
         questions/Agl_01.cpp
         questions/Agl_02.cpp
 )

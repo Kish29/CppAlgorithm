@@ -13,6 +13,8 @@
 #include "unistd.h"
 #include "string"
 #include "cstring"
+#include "exception"
+#include "cerrno"
 
 /* STL Container */
 /* Sequence Container */
@@ -33,11 +35,16 @@
 #include "stack"
 #include "queue"
 
+/* Smart Pointer */
+#include "memory"
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::pair;
+using std::tuple;
+using std::function;
+using std::move;
 
 using std::iterator;
 // 序列容器的底层实现是：数组+扩容复制 / 链表
@@ -65,6 +72,11 @@ using std::unordered_multimap;
 using std::stack;
 using std::queue;
 using std::priority_queue;
+
+// 智能指针
+using std::shared_ptr;
+using std::unique_ptr;
+using std::weak_ptr;
 
 typedef unsigned long ul;
 
