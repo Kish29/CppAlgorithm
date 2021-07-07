@@ -31,6 +31,7 @@ public:
     void set() {
         shared_from_this();
     }
+
     static shared_ptr<Person> initFamily(const string &name) {
         shared_ptr<Person> mom(new Person(name + "'s mom"), getPersonDeleter());
         shared_ptr<Person> father(new Person(name + "'s dad"), getPersonDeleter());

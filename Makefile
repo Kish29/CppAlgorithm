@@ -1,11 +1,16 @@
 CXX := llvm-g++
-CXXFLLGS := -I include/*
+INCLUDE_FLAG := -I include
+CXXFLLGS := --std=c++11 $(INCLUDE_FLAG)
 
 target := CppAlgorithm
-dependency := preface/CppConcurrency.o
+dependency := CppConcurrency.o
+source := preface/CppConcurrency.cpp
 
 CppAlgorithm: $(dependency)
 	$(CXX) $(CXXFLLGS) -o $(target) $(dependency)
+
+$(dependency): $(source)
+	$(CXX) $(CXXFLLGS) -c $(source)
 
 .PHONY: clean
 

@@ -2,7 +2,7 @@
 // Created by 蒋澳然 on 2021/7/7.
 //
 
-#include "TimeMeasure.h"
+#include "timemeasure/TimeMeasure.h"
 
 const double cnm = 2134.121512512616161624124;
 const double factor = 123.4212521512512351235;
@@ -25,10 +25,10 @@ public:
         }
         for (thread &t: threadPool) {
             // join可以简单的看成是阻塞式调用
-//            t.join();
-            t.detach();
+            t.join();
+//            t.detach();
         }
-//        Println("Now all background threads are done in " + currentThreadName());
+        Println("Now all background threads are done in " + currentThreadName());
     }
 };
 
@@ -47,9 +47,9 @@ int main() {
     UserSerial userSerial;
     timeMeasure->setTimeUnit(MILLISECONDS);
     auto time1 = timeMeasure->measureTime(useConcurrency);
-    Println("Waiting for all background threads work done");
-    while (threadCheck);
-    Println("Now all background threads are done in " + currentThreadName());
+//    Println("Waiting for all background threads work done");
+//    while (threadCheck);
+//    Println("Now all background threads are done in " + currentThreadName());
     auto time2 = timeMeasure->measureTime(userSerial);
     Println("Use concurrency decrease time " + to_string(((double) (time2 - time1) / (double) time2) * 100) + "%");
 }
