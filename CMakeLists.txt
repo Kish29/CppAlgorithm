@@ -23,6 +23,8 @@ add_executable(
         preface/BFSTemplate.cpp
         preface/SharePointer3.cpp
         preface/WeakPointer1.cpp
+        preface/CppConcurrency.cpp
+        preface/PointerType.cpp
         questions/Agl_01.cpp
         questions/Agl_02.cpp
 )

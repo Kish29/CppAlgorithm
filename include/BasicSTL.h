@@ -15,6 +15,8 @@
 #include "cstring"
 #include "exception"
 #include "cerrno"
+#include "thread"
+#include "atomic"
 
 /* STL Container */
 /* Sequence Container */
@@ -45,6 +47,8 @@ using std::pair;
 using std::tuple;
 using std::function;
 using std::move;
+using std::to_string;
+using std::thread;
 
 using std::iterator;
 // 序列容器的底层实现是：数组+扩容复制 / 链表
@@ -79,6 +83,13 @@ using std::unique_ptr;
 using std::weak_ptr;
 
 typedef unsigned long ul;
+
+static string currentThreadName() {
+#define BUF_SIZE 255
+    char cb[BUF_SIZE];
+    pthread_getname_np(pthread_self(), cb, BUF_SIZE);
+    return cb;
+}
 
 template<class T>
 static void Println(const T &t) {

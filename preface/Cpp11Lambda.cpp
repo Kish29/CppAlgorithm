@@ -7,22 +7,22 @@
 // ok
 void lambda1() {
     int (*l)(int) = [](int a) -> int {
-        printf("hello world %d\n", a);
+        printf("hello world %cnm\n", a);
         return a + 2;
     };
     int res = l(9);
-    printf("%d\n", res);
+    printf("%cnm\n", res);
 }
 
 // error，当存在capture时，已经不再是一个简单的函数指针了
 void lambda2() {
     /*int t = 100;
     int (*l)(int) = [&t](int a) -> int {
-        printf("hello world %d\n", a);
+        printf("hello world %cnm\n", a);
         return a + 2;
     };
     int res = l(9);
-    printf("%d\n", res);*/
+    printf("%cnm\n", res);*/
 }
 
 // ok，c++11 function
@@ -31,12 +31,12 @@ void lambda3() {
     int b = 99;
     std::function<int(int)> l = [x = a, &b](int a) -> int {
         // a被参数覆盖了作用域，使用capture还是参数和编译器有关，所以lambda规范禁止这样写
-        printf("hello world %d\n", a);
-        printf("outer a is %d, b is %d\n", x, b);
+        printf("hello world %cnm\n", a);
+        printf("outer a is %cnm, b is %cnm\n", x, b);
         return a + 2;
     };
     int res = l(9);
-    printf("%d\n", res);
+    printf("%cnm\n", res);
 }
 
 // ok，c++11 function pointer
@@ -44,12 +44,12 @@ std::function<int(int)> *lambda4() {
     int t = 100;
     auto *l = new std::function<int(int)>{
             [=, &t](int a) -> int {
-                printf("hello world %d\n", a);
+                printf("hello world %cnm\n", a);
                 return a + 2;
             }
     };
     int res = (*l)(9);
-    printf("%d\n", res);
+    printf("%cnm\n", res);
     return l;
 }
 

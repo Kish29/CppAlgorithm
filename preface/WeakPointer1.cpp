@@ -5,7 +5,7 @@
 /* 本列子中，Peter持有了父母的ptr，而父母有持有了Peter的ptr，造成循环引用，对象泄漏 */
 #include "TimeMeasure.h"
 
-class Person {
+class Person : public std::enable_shared_from_this<Person> {
 
 public:
     string name{};
@@ -28,6 +28,9 @@ public:
         Println("delete " + this->name);
     }
 
+    void set() {
+        shared_from_this();
+    }
     static shared_ptr<Person> initFamily(const string &name) {
         shared_ptr<Person> mom(new Person(name + "'s mom"), getPersonDeleter());
         shared_ptr<Person> father(new Person(name + "'s dad"), getPersonDeleter());
@@ -73,7 +76,7 @@ public:
     }
 };
 
-int main() {
-    WeakPtr1 weakPtr1;
-    timeMeasure->measureTime(weakPtr1);
-}
+//int main() {
+//    WeakPtr1 weakPtr1;
+//    timeMeasure->measureTime(weakPtr1);
+//}

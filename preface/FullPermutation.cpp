@@ -61,7 +61,7 @@ public:
         for (vector<int> &r: res) {
             printf("[");
             for (int &i : r) {
-                printf("%d, ", i);
+                printf("%cnm, ", i);
             }
             printf("]\n");
         }

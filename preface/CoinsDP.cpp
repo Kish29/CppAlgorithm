@@ -71,7 +71,7 @@ public:
 
 };
 
-vector<int> const *test1(int n) {
+vector<int> *test1(int n) {
     auto *res = new vector<int>;
     res->push_back(1);
     res->push_back(2);

@@ -47,6 +47,10 @@ public:
 
     explicit TimeMeasure(TimeUnit u) : unit(u) {}
 
+    void setTimeUnit(TimeUnit u = MICROSECONDS) {
+        this->unit = u;
+    }
+
     uint64_t measureTime(TimeMeasureExe &exe) const {
         struct timespec startTime{}, endTime{};
         clock_gettime(CLOCK_REALTIME, &startTime);
@@ -76,6 +80,6 @@ public:
 
 };
 
-static TimeMeasure const *timeMeasure = new TimeMeasure(MICROSECONDS);
+static TimeMeasure *const timeMeasure = new TimeMeasure(MICROSECONDS);
 
 #endif //CPPALGORITHM_TIMEMEASURE_H
