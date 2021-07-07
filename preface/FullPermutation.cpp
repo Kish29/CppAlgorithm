@@ -42,6 +42,7 @@ public:
         }
         for (int choice : choices) {
             if (contains(track, choice)) {
+                // if (std::find(track.begin(), track.end(), choice) != track.end()) {
                 continue;
             }
             track.push_back(choice);
@@ -60,7 +61,7 @@ public:
         for (vector<int> &r: res) {
             printf("[");
             for (int &i : r) {
-                printf("%d, ", i);
+                printf("%cnm, ", i);
             }
             printf("]\n");
         }

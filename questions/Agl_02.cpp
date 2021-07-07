@@ -39,11 +39,11 @@ public:
         return *newStr;
     }
 
-    int openLock(vector<string> &deadends, string target) {
+    int openLock(vector<string> &deadends, string &target) {
         return BFS(deadends, target);
     }
 
-    int BFS(vector<string> &deadends, string target) {
+    int BFS(vector<string> &deadends, string &target) {
         queue<string> store;
         set<string> visited;
         string start = "0000";
