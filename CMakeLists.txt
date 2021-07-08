@@ -9,9 +9,13 @@ include_directories(include/timemeasure)
 
 add_executable(
         CppAlgorithm
+        #        threadsafe_stack2.cpp
         include/BasicSTL.h
+        preface/Synchronize.cpp
+        preface/Deadlock.cpp
         include/data/DataStructure.h
         include/timemeasure/TimeMeasure.h
+        preface/threadsafe_stack.cpp
         preface/STLContainerBasic.cpp
         preface/STLSmartPointer.cpp
         preface/Cpp11Lambda.cpp

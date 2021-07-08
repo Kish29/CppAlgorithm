@@ -17,6 +17,8 @@
 #include "cerrno"
 #include "thread"
 #include "atomic"
+#include "random"
+#include "condition_variable"
 
 /* STL Container */
 /* Sequence Container */
@@ -84,12 +86,46 @@ using std::weak_ptr;
 
 typedef unsigned long ul;
 
+
+static std::random_device dv;
+static std::default_random_engine dre = std::default_random_engine(dv());
+static std::uniform_int_distribution<int> uidis(1, 10);
+static std::uniform_int_distribution<bool> ubdis;
+static std::atomic_uint64_t g_thread_num(0);
+
+const unsigned CORE_NUM = std::thread::hardware_concurrency();
+
+// 常量表达式，编译期确定
+constexpr int func() {
+    return 10;
+}
+
 static string currentThreadName() {
 #define BUF_SIZE 255
     char cb[BUF_SIZE];
     pthread_getname_np(pthread_self(), cb, BUF_SIZE);
     return cb;
 }
+
+class thread_with_name : public thread {
+
+    typedef thread super;
+    string t_name{};
+
+    void set_thread_self_name() const {
+        pthread_setname_np(t_name.c_str());
+    }
+
+public:
+
+    explicit thread_with_name(string n = "thread-" + to_string(g_thread_num++)) : t_name(move(n)) {}
+
+    void join() {
+        set_thread_self_name();
+        super::join();
+    }
+
+};
 
 template<class T>
 static void Println(const T &t) {
