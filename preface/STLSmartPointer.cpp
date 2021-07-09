@@ -2,6 +2,8 @@
 // Created by 蒋澳然 on 2021/7/5.
 //
 
+#include <memory>
+
 #include "TimeMeasure.h"
 
 void SharedPointer();
@@ -19,6 +21,11 @@ public:
 //        SharedPointer();
         UniquePointer();
 //        WeakPointer();
+        /*vector<unique_ptr<string>> stringPool(10);
+        for (int i = 0; i < 10; ++i) {
+            stringPool.at(i) = std::make_unique<string>("jar");
+        }
+        stringPool.at(2)->replace(1, 1, "j");*/
     }
 
 };

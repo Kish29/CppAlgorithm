@@ -3,6 +3,16 @@ project(CppAlgorithm)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# boost library
+set(BOOST_VERSION 1.76.0)
+find_package(Boost ${BOOST_VERSION} COMPONENTS system filesystem thread REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
+#set(Boost_include_dir /opt/homebrew/Cellar/boost/${BOOST_VERSION}/include)
+#set(Boost_link_dir /opt/homebrew/Cellar/boost/${BOOST_VERSION}/lib)
+#include_directories(${Boost_include_dir})
+
+
 include_directories(include)
 include_directories(include/data)
 include_directories(include/timemeasure)
@@ -11,10 +21,12 @@ add_executable(
         CppAlgorithm
         #        threadsafe_stack2.cpp
         include/BasicSTL.h
-        preface/Synchronize.cpp
-        preface/Deadlock.cpp
         include/data/DataStructure.h
         include/timemeasure/TimeMeasure.h
+        preface/Synchronize.cpp
+        preface/ShareMutex.cpp
+        preface/Deadlock.cpp
+        preface/threadsafe_query_table.cpp
         preface/threadsafe_stack.cpp
         preface/STLContainerBasic.cpp
         preface/STLSmartPointer.cpp
@@ -32,3 +44,6 @@ add_executable(
         questions/Agl_01.cpp
         questions/Agl_02.cpp
 )
+
+#target_link_libraries(${PROJECT_NAME} ${Boost_link_dir})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})

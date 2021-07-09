@@ -30,7 +30,7 @@ data_chunk &produce() {
 [[noreturn]] void data_preparation_thread() {
     while (true) {
         data_chunk const data = produce();
-        std::unique_lock<std::mutex> lk(mut);
+        std::lock_guard<std::mutex> lg(mut);
         data_queue.emplace(data);
         data_cond.notify_one();
         std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -41,6 +41,7 @@ data_chunk &produce() {
     while (true) {
         std::unique_lock<std::mutex> lk(mut);
         // 等待data_queue不为空的时候，执行后续代码
+        // wait执行时，如果不满足lambda表达式的条件，该线程会释放lk的锁，并进入阻塞状态
         data_cond.wait(lk, []() -> bool { return !data_queue.empty(); });
         data_chunk data = data_queue.front();
         data_queue.pop();

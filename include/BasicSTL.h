@@ -20,6 +20,10 @@
 #include "random"
 #include "condition_variable"
 
+/* boost library */
+#include "boost/thread.hpp"
+#include "boost/ref.hpp"
+
 /* STL Container */
 /* Sequence Container */
 #include "array"
@@ -86,6 +90,8 @@ using std::weak_ptr;
 
 typedef unsigned long ul;
 
+typedef typename boost::shared_lock<boost::shared_mutex> read_lock;
+typedef typename boost::unique_lock<boost::shared_mutex> write_lock;
 
 static std::random_device dv;
 static std::default_random_engine dre = std::default_random_engine(dv());

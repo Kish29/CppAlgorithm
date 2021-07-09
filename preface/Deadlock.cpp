@@ -70,23 +70,45 @@ void lockSafe2(LockHolder<T> &l1, LockHolder<T> &l2) {
     work(l1.val, l2.val);
 }
 
+struct my_data {
+    int i;  // 32     4
+    double d;   // 64     8
+    unsigned bf1: 10;   // 10   4
+    int bf2: 25;    // 25    4
+    int bf3: 1; // 1    4
+    int bf4: 9; // 9    4
+    int i2; // 32       4
+    char c1;
+    char c2;    // 16   8
+    std::string s;  // 192   24
+};
+
+struct my_data2 {
+    char c;
+    int i;
+};
+
+/*
 int main() {
+    Println(sizeof(struct my_data));
+    Println(sizeof(struct my_data2));
     LockHolder<string> l1("jar");
     LockHolder<string> l2("lzy");
 
     thread t1{[&]() -> void {
         pthread_setname_np("thread-t1");
-//        deadlock(l1, l2);
-//        lockSafe(l1, l2);
+        deadlock(l1, l2);
+        lockSafe(l1, l2);
         lockSafe2(l1, l2);
     }};
     thread t2{[&]() -> void {
         pthread_setname_np("thread-t2");
-//        deadlock(l2, l1);
-//        lockSafe(l2, l1);
+        deadlock(l2, l1);
+        lockSafe(l2, l1);
         lockSafe2(l2, l1);
     }};
 
     t1.join();
     t2.join();
 }
+*/
