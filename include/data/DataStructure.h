@@ -6,6 +6,9 @@
 #define CPPALGORITHM_DATASTRUCTURE_H
 
 #include "vector"
+#include "memory"
+
+using std::unique_ptr;
 
 using std::vector;
 

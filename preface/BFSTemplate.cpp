@@ -12,14 +12,13 @@ public:
 //        BFS()
     }
 
-
     int BFS(const Node<int> &start, const Node<int> &target) const {
-        queue<Node<int>> queue{};
+        queue<Node<int>> queue;
         // unordered_set会根据Node<int>计算hash，所以需要一个hash计算的函数
-//        unordered_set<Node<int>, NodeHash<int>> visited;
+        // unordered_set<Node<int>, NodeHash<int>> visited;
+        set<string> visited;
 
         queue.push(start);
-        set<string> visited;
         string star = "0000";
         string star2(star);
         visited.insert(star);
