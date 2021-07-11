@@ -13,9 +13,9 @@
 vector<int> ms(const vector<int> &nums) {
     vector<int> res(nums.size());
     // 单调栈，保存元素，元素是一个单调递增的或者单调递减的
-    stack<int> msStack;
+    stack<int> msStack{};
     try {
-        for (unsigned long i = nums.size() - 1; i >= 0; i--) {
+        for (int i = (int) nums.size() - 1; i >= 0; i--) {
             // 将单调栈中所有比当前元素小的元素弹出
             while (!msStack.empty() && msStack.top() <= nums.at(i)) {
                 msStack.pop();

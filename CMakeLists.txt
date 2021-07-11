@@ -43,7 +43,7 @@ add_executable(
         preface/PointerType.cpp
         questions/Agl_01.cpp
         questions/Agl_02.cpp
-        frame/BSTemplate.h frame/DFSTemplate.h frame/BFSTemplate.h frame/SWTemplate.h frame/MSTemplate.h questions/Agl_03.cpp questions/Agl_04.cpp questions/Agl_05.cpp questions/Agl_06.cpp questions/Agl_07.cpp)
+        frame/BSTemplate.h frame/DFSTemplate.h frame/BFSTemplate.h frame/SWTemplate.h frame/MSTemplate.h questions/Agl_03.cpp questions/Agl_04.cpp questions/Agl_05.cpp questions/Agl_06.cpp questions/Agl_07.cpp frame/MQTemplate.h frame/DPTemplate.h questions/Agl_08.cpp)
 
 #target_link_libraries(${PROJECT_NAME} ${Boost_link_dir})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
